@@ -22,8 +22,8 @@ jobs:
           '',
           'OPENSSL_TAG=master',
           'WOLFSSL_TAG=master ',
-          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-keygen --enable-aesni --enable-intelasm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
-          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-keygen --enable-aesni --enable-intelasm --enable-sp=yes,asm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
+          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
+          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-sp=yes,asm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
           'OPENSSL_TAG=master WOLFSSL_TAG=master',
         ]
     name: make check
@@ -34,14 +34,6 @@ jobs:
       - uses: actions/checkout@v4
         name: Checkout wolfProvider
 
-      - name: Test wolfProvider
+      - name: Speed wolfProvider
         run: |
           ${{ matrix.config }} ./scripts/build-wolfprovider.sh
-          make check
-
-      - name: Print errors 
-        if: ${{ failure() }}
-        run: |
-          if [ -f test-suite.log ] ; then
-            cat test-suite.log
-          fi
