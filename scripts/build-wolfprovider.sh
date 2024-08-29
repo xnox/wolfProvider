@@ -11,7 +11,6 @@ echo "Using openssl: $OPENSSL_TAG, wolfssl: $WOLFSSL_TAG"
 init_wolfprov
 
 set -x
-cat $LOG_FILE
 $OPENSSL_INSTALL_DIR/bin/openssl speed -provider default sha256 rsa2048 ecdsap256
 $OPENSSL_INSTALL_DIR/bin/openssl speed -provider $WOLFPROV_PATH/libwolfprov.so.0 sha256 rsa2048 ecdsap256
 

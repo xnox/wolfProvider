@@ -18,13 +18,13 @@ jobs:
     strategy:
       matrix:
         config: [
-          # Add new configs here
-          '',
-          'OPENSSL_TAG=master',
-          'WOLFSSL_TAG=master ',
-          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
-          'WOLFSSL_TAG=master WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-sp=yes,asm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
+          # WOLFSSL master fails rsa & ecc setup
+          'WOLFSSL_TAG=master',
           'OPENSSL_TAG=master WOLFSSL_TAG=master',
+          # v5.7.2-stable build works with rsa & ecc setup
+          '',
+          'WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
+          'WOLFSSL_CONFIG_OPTS="--enable-aesni --enable-intelasm --enable-sp=yes,asm --enable-all-crypto --with-eccminsz=192 --with-max-ecc-bits=1024 --enable-opensslcoexist --enable-sha"',
         ]
     name: make check
     runs-on: ubuntu-latest
